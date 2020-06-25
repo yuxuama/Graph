@@ -6,9 +6,9 @@ import utils.maths.graphs.exceptions.wrongSizeException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Graph {
+public abstract class Graph {
 
-    private List<Summit> childs;
+    protected List<Summit> childs;
 
     public Graph(){
         childs = new ArrayList<>();
@@ -44,12 +44,7 @@ public class Graph {
         }
     }
 
-    public void addLink(Summit s1, Summit s2, int weight){
-        if(!s1.hasChild(s2) && !s2.hasChild(s1)){
-            s1.addChildLink(s2, weight);
-            s2.addChildLink(s1, weight);
-        }
-    }
+    public abstract void addLink(Summit s1, Summit s2, int weight);
 
     public void addLink(Object sValue, Object sValue2,  int weight){
         Summit s1 = findOne(sValue);
@@ -68,25 +63,9 @@ public class Graph {
         }
     }
 
-    public void removeLink(Object sValue, Object sValue2){
-        Summit s1 = findOne(sValue);
-        Summit s2 = findOne(sValue2);
+    public abstract void removeLink(Object sValue, Object sValue2);
 
-        if(s1.hasChild(s2) && s2.hasChild(s1) && !s1.equals(s2)){
-            s1.removeChildLink(s2);
-            s2.removeChildLink(s1);
-        }
-    }
-
-    public void removeAllLink(Summit summit){
-        for(Summit s: childs){
-            if(s.hasChild(summit)){
-                s.removeChildLink(summit);
-            }
-        }
-
-        summit.removeAllChild();
-    }
+    public abstract void removeAllLink(Summit summit);
 
     public void removeAllLink(Object sValue){
         Summit removed = findOne(sValue);
@@ -104,7 +83,7 @@ public class Graph {
             }
         }
 
-        throw new NullPointerException();
+        return null;
     }
 
     public boolean hasSummit(Object value){
@@ -167,33 +146,15 @@ public class Graph {
     /** GETTERS
      * **/
 
-    public Link getLink(Summit summit, Summit summit2){
-        for(Link l: summit.getChilds()){
-            if(l.getLinkedTo().equals(summit2)){
-                return l;
-            }
+    public Object[] getChilds(){
+        Object[] childs = new Object[this.childs.size()];
+        for(int i = 0; i<this.childs.size(); i++){
+            childs[i] = this.childs.get(i).getValue();
         }
-
-        return null;
+        return childs;
     }
 
-    public Link getLink(Object sValue, Object sValue2){
-        Summit s1 = findOne(sValue);
-        Summit s2 = findOne(sValue2);
-
-        return getLink(s1, s2);
-    }
-
-    public int getLinkWeight(Object sValue, Object sValue2){
-        Link link = getLink(sValue, sValue2);
-        if(link != null){
-            return link.getWeight();
-        } else{
-            return -2;
-        }
-    }
-
-    public List<Summit> getChilds(){
+    public List<Summit> getChildsList(){
         return childs;
     }
 }

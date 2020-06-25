@@ -7,6 +7,7 @@ public class Summit {
 
     private Object value;
     private List<Link> childs;
+    private List<Link> parents;
 
     /** Constructor
     **/
@@ -14,6 +15,7 @@ public class Summit {
     public Summit(Object value){
         this.value = value;
         this.childs = new ArrayList<>();
+        this.parents = new ArrayList<>();
     }
 
     /** METHODS
@@ -28,13 +30,27 @@ public class Summit {
         Link removed = foundChild(child);
         if(removed != null){
             childs.remove(removed);
-        } else {
-            throw new NullPointerException("Link does not exist");
-        }
+        } else throw new NullPointerException("Link does not exist");
     }
 
     public void removeAllChild(){
         childs.clear();
+    }
+
+    public void addParentLink(Summit parent, int weight){
+        Link link = new Link(parent, weight);
+        parents.add(link);
+    }
+
+    public void removeParentLink(Summit parent){
+        Link removed = foundParent(parent);
+        if(removed != null){
+            parents.remove(removed);
+        } else throw new NullPointerException("Link does not exist");
+    }
+
+    public void removeAllParent(){
+        parents.clear();
     }
 
     public boolean hasChild(Summit tested){
@@ -43,6 +59,16 @@ public class Summit {
 
     private Link foundChild(Summit searched){
         for(Link link: childs){
+            if(link.getLinkedTo() == searched){
+                return link;
+            }
+        }
+
+        return null;
+    }
+
+    private Link foundParent(Summit searched){
+        for(Link link: parents){
             if(link.getLinkedTo() == searched){
                 return link;
             }
