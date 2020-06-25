@@ -10,17 +10,15 @@ public abstract class Graph {
 
     protected List<Summit> childs;
 
+    /** CONSTRUCTOR **/
+
     public Graph(){
         childs = new ArrayList<>();
     }
 
-    /** ADDERS AND REMOVERS
-     * **/
+    /**SUMMIT MANAGEMENT**/
 
-    public void addSummit(Object value){
-        Summit s = new Summit(value);
-        childs.add(s);
-    }
+    public abstract void addSummit(Object value);
 
     public void addAllSummit(Object[] values){
         for(Object value: values){
@@ -43,6 +41,8 @@ public abstract class Graph {
             removeSummit(o);
         }
     }
+
+    /**LINK MANAGEMENT**/
 
     public abstract void addLink(Summit s1, Summit s2, int weight);
 
@@ -73,8 +73,7 @@ public abstract class Graph {
         removeAllLink(removed);
     }
 
-    /** METHODS
-     * **/
+    /** OTHERS METHODS **/
 
     public Summit findOne(Object value){
         for(Summit s: childs){
@@ -143,8 +142,7 @@ public abstract class Graph {
         }
     }
 
-    /** GETTERS
-     * **/
+    /** GETTERS **/
 
     public Object[] getChilds(){
         Object[] childs = new Object[this.childs.size()];

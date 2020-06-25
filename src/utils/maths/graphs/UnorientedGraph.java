@@ -7,6 +7,12 @@ public class UnorientedGraph extends Graph{
     }
 
     @Override
+    public void addSummit(Object value) {
+        Summit s = new Summit(value, false);
+        childs.add(s);
+    }
+
+    @Override
     public void addLink(Summit s1, Summit s2, int weight) {
         if(!s1.hasChild(s2) && !s2.hasChild(s1)){
             s1.addChildLink(s2, weight);

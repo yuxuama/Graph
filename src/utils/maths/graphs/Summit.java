@@ -9,17 +9,18 @@ public class Summit {
     private List<Link> childs;
     private List<Link> parents;
 
-    /** Constructor
-    **/
+    /** CONSTRUCTOR  **/
 
-    public Summit(Object value){
+    public Summit(Object value, boolean oriented){
         this.value = value;
         this.childs = new ArrayList<>();
-        this.parents = new ArrayList<>();
+        if(oriented){
+            this.parents = new ArrayList<>();
+        }
+
     }
 
-    /** METHODS
-     * */
+    /** CHILD LINK METHODS  **/
 
     public void addChildLink(Summit child, int weight){
         Link link = new Link(child, weight);
@@ -37,6 +38,8 @@ public class Summit {
         childs.clear();
     }
 
+    /** PARENT LINK METHODS**/
+
     public void addParentLink(Summit parent, int weight){
         Link link = new Link(parent, weight);
         parents.add(link);
@@ -53,8 +56,14 @@ public class Summit {
         parents.clear();
     }
 
+    /** OTHERS USEFUL METHODS**/
+
     public boolean hasChild(Summit tested){
         return foundChild(tested) != null;
+    }
+
+    public boolean hasParent(Summit tested){
+        return foundParent(tested) != null;
     }
 
     private Link foundChild(Summit searched){
@@ -77,8 +86,7 @@ public class Summit {
         return null;
     }
 
-   /** GETTERS AND SETTERS
-   * */
+   /** GETTERS AND SETTERS */
 
     public Object getValue() {
         return value;
@@ -92,6 +100,15 @@ public class Summit {
         Link[] result = new Link[childs.size()];
         for(int i = 0; i < childs.size(); i++){
             result[i] = childs.get(i);
+        }
+
+        return result;
+    }
+
+    public Link[] getParents(){
+        Link[] result = new Link[parents.size()];
+        for(int i = 0; i<parents.size(); i++){
+            result[i] = parents.get(i);
         }
 
         return result;
