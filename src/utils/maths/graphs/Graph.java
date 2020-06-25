@@ -85,20 +85,6 @@ public abstract class Graph {
         return null;
     }
 
-    public boolean hasSummit(Object value){
-        for(Summit s: childs){
-            if(s.getValue() == value){
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void clear(){
-        childs.clear();
-    }
-
     public int[][] toAdjacentMatrix(){
         int size = childs.size();
         int[][] matrix = new int[size][size];
@@ -116,7 +102,7 @@ public abstract class Graph {
             Link[] sLink = s.getChilds();
             for(Link l: sLink){
                 Summit child = l.getLinkedTo();
-                matrix[childs.indexOf(child)][i] = l.getWeight();
+                matrix[i][childs.indexOf(child)] = l.getWeight();
             }
         }
 
@@ -140,6 +126,20 @@ public abstract class Graph {
                 }
             }
         }
+    }
+
+    public boolean hasSummit(Object value){
+        for(Summit s: childs){
+            if(s.getValue() == value){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void clear(){
+        childs.clear();
     }
 
     /** GETTERS **/
