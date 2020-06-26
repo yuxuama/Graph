@@ -2,10 +2,12 @@ package utils.maths.graphs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Summit {
 
     private Object value;
+    private int subvalue;
     private List<Link> childs;
     private List<Link> parents;
 
@@ -86,6 +88,18 @@ public class Summit {
         return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Summit summit = (Summit) o;
+        return value.equals(summit.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
    /** GETTERS AND SETTERS */
 
     public Object getValue() {
@@ -112,6 +126,14 @@ public class Summit {
         }
 
         return result;
+    }
+
+    public int getSubvalue() {
+        return subvalue;
+    }
+
+    public void setSubvalue(int subvalue) {
+        this.subvalue = subvalue;
     }
 
     @Override
