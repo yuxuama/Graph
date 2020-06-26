@@ -19,6 +19,7 @@ public class Summit {
         if(oriented){
             this.parents = new ArrayList<>();
         }
+        this.subvalue = -1;
 
     }
 

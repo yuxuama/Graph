@@ -21,7 +21,6 @@ public class OrientedGraph extends Graph {
         /*Adding link considering s1 is parent and s2 child
         the so-created link will have the specified weight
         * */
-
         if(!s1.hasChild(s2) && !s2.hasParent(s1)){
             s1.addChildLink(s2, weight);
             s2.addParentLink(s1, weight);

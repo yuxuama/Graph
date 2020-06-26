@@ -50,7 +50,7 @@ public abstract class Graph {
         Summit s1 = findOne(sValue);
         Summit s2 = findOne(sValue2);
 
-        addLink(s2, s2, weight);
+        addLink(s1, s2, weight);
     }
 
     public void addLink(Object sValue, Object sValue2){
