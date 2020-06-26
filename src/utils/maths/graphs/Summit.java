@@ -100,7 +100,8 @@ public class Summit {
     public int hashCode() {
         return Objects.hash(value);
     }
-   /** GETTERS AND SETTERS */
+
+    /** GETTERS AND SETTERS */
 
     public Object getValue() {
         return value;

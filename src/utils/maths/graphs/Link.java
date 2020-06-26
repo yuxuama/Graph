@@ -29,4 +29,9 @@ public class Link {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return "Linked to -> " + linkedTo.toString();
+    }
 }

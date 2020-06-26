@@ -128,14 +128,22 @@ public abstract class Graph {
         }
     }
 
-    public boolean hasSummit(Object value){
+    public boolean hasSummit(Summit summit){
         for(Summit s: childs){
-            if(s.getValue() == value){
+            if(s == summit){
                 return true;
             }
         }
 
         return false;
+    }
+
+    public boolean hasSummit(Object value){
+        return hasSummit(findOne(value));
+    }
+
+    public int size(){
+        return childs.size();
     }
 
     public void clear(){
